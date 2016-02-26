@@ -1,0 +1,45 @@
+<div class="container-fluid" ng-controller="fullPostsController as post">
+    <!-- Page Heading -->
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                Full Post
+            </h1>
+        </div>
+    </div>
+    <!-- /.row -->
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+
+                </div>
+                <div class="panel-body">
+
+                    <h1>{{post.fullPost.title}}</h1>
+                      By: <a href="#/user?username={{post.fullPost.author}}">{{post.fullPost.author}}</a>
+                      <p>
+                        {{post.fullPost.body}}
+                      </p>
+                    </li>
+                  </ul>
+                  <div ng-style="{'margin-top': '30px'}">
+                    <h4><i>Comments:</i></h4>
+                    <div ng-repeat="comment in post.fullPost.comments track by $index">
+                          <div id="commentBox">
+                            <p><strong>By: {{comment.email}}</strong></p>
+                            {{comment.body}}
+                          </div>
+                        <hr/>
+                    </div>
+                  </div>
+               </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.row -->
+
+
+</div>
+<!-- /.container-fluid -->
