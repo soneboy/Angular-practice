@@ -2,13 +2,13 @@ angular
     .module('MyApp')
     .controller('postsController', postFunction);
 
-function postFunction($http, $timeout, $q, $log) {
+function postFunction($http, $timeout, $q, $log, ajax) {
 
   var self = this;
   var local_search_array = [];
 
 
-  $http.get('http://jsonplaceholder.typicode.com/posts').then(function(response){
+  ajax.get('posts').then(function(response){
 
      var local_post_object = {};
      var local_post_array = [];
@@ -23,6 +23,7 @@ function postFunction($http, $timeout, $q, $log) {
              local_search_array.push(local_search_object);
 
              local_post_object.title = response.data[k].title;
+             local_post_object.id = response.data[k].id;
              local_post_array.push(local_post_object);
       }
 
@@ -77,7 +78,7 @@ function postFunction($http, $timeout, $q, $log) {
 
 
 
-      $http.get('http://jsonplaceholder.typicode.com/users').then(function(responseSecond){
+        ajax.get('users').then(function(responseSecond){
 
       var users = responseSecond.data;
 
@@ -92,10 +93,14 @@ function postFunction($http, $timeout, $q, $log) {
         }
       }
      }
+  }, function(error){
+    console.log(error.statusText);
   });
 
     self.testPosts = local_post_array;
-    console.log(self.testPosts);
+
+ }, function(error){
+   console.log(error.statusText);
  });
 
 }
